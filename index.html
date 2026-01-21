@@ -1,147 +1,29 @@
 <!DOCTYPE html>
 <html lang="no">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Veronika's school project" />
-  <title>Isbjørn | Skoleprosjekt</title>
-  <link rel="stylesheet" href="src/css/style.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Veronika's school project" />
+    <title>Hjemmeside | Skoleprosjekt</title>
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script src="scripts/footerInclude.js" defer></script>
+  </head>
 
-<body class="main">
+  <body class="main">
+    <header>
+    </header>
+    <main id="main-content" class="page">
+      <section class="page">
+        <h1>Kategorier</h1>
 
-  <!-- Clickable image -->
-  <button id="openImage" class="image-btn" aria-label="Open image fullscreen">
-    <img
-      src="assets/polar-bear.jpg"
-      alt="Polar Bear"
-      class="polar-bear-image"
-    />
-  </button>
-
-  <!-- Fullscreen overlay -->
-  <div id="overlay" class="overlay" hidden>
-    <div id="zoomWrap" class="zoom-wrap">
-      <img
-        id="zoomImg"
-        src="assets/polar-bear.jpg"
-        alt="Polar Bear fullscreen"
-      />
-    </div>
-  </div>
-
-  <!-- Audio -->
-  <audio id="sound" preload="auto">
-    <source src="assets/polar-bear.mp3" type="audio/mpeg" />
-  </audio>
-
-  <button id="toggle" class="play-btn">Play</button>
-
-  <script>
-    /* =====================
-       AUDIO
-    ===================== */
-    const audio = document.getElementById("sound");
-    const toggle = document.getElementById("toggle");
-
-    audio.volume = 0.5;
-
-    toggle.addEventListener("click", async () => {
-      if (audio.paused) {
-        try {
-          await audio.play();
-          toggle.textContent = "Pause";
-        } catch (_) {}
-      } else {
-        audio.pause();
-        toggle.textContent = "Play";
-      }
-    });
-
-    audio.addEventListener("ended", () => {
-      toggle.textContent = "Play";
-    });
-
-    /* =====================
-       FULLSCREEN IMAGE + PINCH ZOOM
-    ===================== */
-    const openImage = document.getElementById("openImage");
-    const overlay = document.getElementById("overlay");
-    const zoomWrap = document.getElementById("zoomWrap");
-    const zoomImg = document.getElementById("zoomImg");
-
-    let scale = 1;
-    const MIN = 1;
-    const MAX = 4;
-
-    let startDist = 0;
-    let startScale = 1;
-
-    function distance(t1, t2) {
-      const dx = t1.clientX - t2.clientX;
-      const dy = t1.clientY - t2.clientY;
-      return Math.hypot(dx, dy);
-    }
-
-    function setScale(next) {
-      scale = Math.min(MAX, Math.max(MIN, next));
-      zoomImg.style.transform = `scale(${scale})`;
-    }
-
-    function resetZoom() {
-      setScale(1);
-      zoomWrap.scrollTop = 0;
-      zoomWrap.scrollLeft = 0;
-    }
-
-    openImage.addEventListener("click", () => {
-      overlay.hidden = false;
-      document.body.style.overflow = "hidden";
-      resetZoom();
-    });
-
-    /* Close overlay on ANY tap */
-    overlay.addEventListener("click", () => {
-      overlay.hidden = true;
-      document.body.style.overflow = "";
-      resetZoom();
-    });
-
-    /* Pinch to zoom */
-    zoomWrap.addEventListener("touchstart", (e) => {
-      if (e.touches.length === 2) {
-        startDist = distance(e.touches[0], e.touches[1]);
-        startScale = scale;
-      }
-    }, { passive: false });
-
-    zoomWrap.addEventListener("touchmove", (e) => {
-      if (e.touches.length === 2) {
-        e.preventDefault();
-        const dist = distance(e.touches[0], e.touches[1]);
-        setScale(startScale * (dist / startDist));
-      }
-    }, { passive: false });
-
-    /* Double-tap zoom toggle */
-    let lastTap = 0;
-    zoomWrap.addEventListener("touchend", () => {
-      const now = Date.now();
-      if (now - lastTap < 300) {
-        setScale(scale === 1 ? 2 : 1);
-      }
-      lastTap = now;
-    });
-
-    /* ESC key support (desktop) */
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !overlay.hidden) {
-        overlay.hidden = true;
-        document.body.style.overflow = "";
-        resetZoom();
-      }
-    });
-  </script>
-
-</body>
+        <div class="grid">
+          <a class="card" href="pages/categories/animals.html">
+            <img class="card-img" src="assets/images/animals/dyr.webp" alt="">
+            <h2 class="card-title">Dyr</h2>
+          </a>
+        </div>
+      </section>
+    </main>
+    <div id="site-footer"></div>
+  </body>
 </html>

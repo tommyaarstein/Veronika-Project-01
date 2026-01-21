@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Image and the sound of a polar bear" />
+  <title>Isbjørn | Skoleprosjekt</title>
+  <link rel="stylesheet" href="../../src/css/style.css" />
+  <script src="../../scripts/audioPlay.js" defer></script>
+  <script src="../../scripts/touchImage.js" defer></script>
+  <script src="../../scripts/footerInclude.js" defer></script>
+</head>
+
+<body class="main-pages">
+
+  <!-- Clickable image -->
+  <button id="openImage" class="image-btn" aria-label="Open image fullscreen">
+    <img
+      src="../../assets/images/animals/polar-bear.jpg"
+      alt="Polar Bear"
+      class="polar-bear-image"
+    />
+  </button>
+
+  <!-- Fullscreen overlay -->
+  <div id="overlay" class="overlay" hidden>
+    <div id="zoomWrap" class="zoom-wrap">
+      <img
+        id="zoomImg"
+        src="../../assets/images/animals/polar-bear.jpg"
+        alt="Polar Bear fullscreen"
+      />
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="sound" preload="auto">
+    <source src="../../assets/mp3/animals/polar-bear.mp3" type="audio/mpeg" />
+  </audio>
+
+  <button id="toggle" class="play-btn">Play</button>
+
+  <div id="site-footer"></div>
+</body>
+</html>
