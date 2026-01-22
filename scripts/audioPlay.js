@@ -1,24 +1,24 @@
 (() => {
   const audio = document.getElementById("sound");
-  const toggle = document.getElementById("toggle");
+  const button = document.getElementById("audio-play-button");
 
-  if (!audio || !toggle) return;
+  if (!audio || !button) return;
 
   audio.volume = 0.5;
 
-  toggle.addEventListener("click", async () => {
+  button.addEventListener("click", async () => {
     if (audio.paused) {
       try {
         await audio.play();
-        toggle.textContent = "Pause";
+        button.textContent = "Pause";
       } catch (_) {}
     } else {
       audio.pause();
-      toggle.textContent = "Play";
+      button.textContent = "Spill av";
     }
   });
 
   audio.addEventListener("ended", () => {
-    toggle.textContent = "Play";
+    button.textContent = "Spill av";
   });
 })();

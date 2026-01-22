@@ -1,0 +1,119 @@
+.site-header {
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+.brand {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 700;
+}
+
+.menu-toggle {
+    margin-left: auto;
+    font-size: 22px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+/* Default: menu hidden on mobile until opened */
+.site-nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 16px;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 200px;
+    width: min(240px, 80vw);
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    z-index: 20;
+}
+
+.site-nav.is-open {
+    display: flex;
+}
+
+.site-nav a {
+    text-decoration: none;
+    color: inherit;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    width: 100%;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+}
+
+.breadcrumbs-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+}
+
+.crumb {
+    text-decoration: none;
+    color: inherit;
+}
+
+.crumb.current {
+    font-weight: 600;
+}
+
+.sep {
+    opacity: 0.6;
+}
+
+/* Tablet/desktop: show menu inline, hide hamburger */
+@media (min-width: 768px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    .header-inner {
+        justify-content: space-between;
+    }
+
+    .site-nav {
+        display: flex;
+        position: static;
+        flex-direction: row;
+        gap: 12px;
+        width: auto;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .site-nav a {
+        border: 0;
+        padding: 8px 10px;
+    }
+}

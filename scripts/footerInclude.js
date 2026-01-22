@@ -2,9 +2,7 @@
   const mount = document.getElementById("site-footer");
   if (!mount) return;
 
-  // Works for GitHub Pages project sites: /<repo-name>/...
-  const parts = window.location.pathname.split("/").filter(Boolean);
-  const base = parts.length ? `/${parts[0]}` : "";
+  const base = getBasePath();
 
   fetch(`${base}/partials/footer.html`)
     .then((r) => (r.ok ? r.text() : Promise.reject()))
@@ -13,3 +11,13 @@
     })
     .catch(() => {});
 })();
+
+function getBasePath() {
+  // GitHub Pages project site: https://username.github.io/<repo>/
+  if (window.location.hostname.endsWith("github.io")) {
+    const parts = window.location.pathname.split("/").filter(Boolean);
+    return parts.length ? `/${parts[0]}` : "";
+  }
+  // Localhost/custom server: site root is /
+  return "";
+}

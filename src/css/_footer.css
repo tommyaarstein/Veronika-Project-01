@@ -1,31 +1,22 @@
 .footer {
     width: 100%;
-    margin-top: auto;
-    /* sticky footer behavior */
-    background-color: #c0c0c0;
-    /* change if you want */
+    background: #6b6b6b;
+    /* bar color */
     color: #000;
 }
 
 .footer-content {
     width: 100%;
-    padding: 12px 16px;
+    max-width: 1100px;
+    /* centered text area */
+    margin: 0 auto;
+    padding: 14px 16px;
     display: flex;
     align-items: center;
-    font-size: 0.85rem;
-
-    /* keep text nicely centered without shrinking the background */
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.footer-content>* {
-    flex: 1;
+    justify-content: center;
 }
 
 .footer-copy {
     margin: 0;
-    margin-bottom: 0.5rem;
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
 }

@@ -1,10 +1,10 @@
 (() => {
-  const openImage = document.getElementById("openImage");
-  const overlay = document.getElementById("overlay");
-  const zoomWrap = document.getElementById("zoomWrap");
-  const zoomImg = document.getElementById("zoomImg");
+  const openImageButton = document.getElementById("detail-image-button");
+  const overlay = document.getElementById("image-overlay");
+  const zoomContainer = document.getElementById("image-zoom-container");
+  const zoomImage = document.getElementById("image-zoom");
 
-  if (!openImage || !overlay || !zoomWrap || !zoomImg) return;
+  if (!openImageButton || !overlay || !zoomContainer || !zoomImage) return;
 
   let scale = 1;
   const MIN = 1;
@@ -21,16 +21,16 @@
 
   function setScale(next) {
     scale = Math.min(MAX, Math.max(MIN, next));
-    zoomImg.style.transform = `scale(${scale})`;
+    zoomImage.style.transform = `scale(${scale})`;
   }
 
   function resetZoom() {
     setScale(1);
-    zoomWrap.scrollTop = 0;
-    zoomWrap.scrollLeft = 0;
+    zoomContainer.scrollTop = 0;
+    zoomContainer.scrollLeft = 0;
   }
 
-  openImage.addEventListener("click", () => {
+  openImageButton.addEventListener("click", () => {
     overlay.hidden = false;
     document.body.style.overflow = "hidden";
     resetZoom();
@@ -44,7 +44,7 @@
   });
 
   /* Pinch to zoom */
-  zoomWrap.addEventListener(
+  zoomContainer.addEventListener(
     "touchstart",
     (e) => {
       if (e.touches.length === 2) {
@@ -55,7 +55,7 @@
     { passive: false },
   );
 
-  zoomWrap.addEventListener(
+  zoomContainer.addEventListener(
     "touchmove",
     (e) => {
       if (e.touches.length === 2) {
@@ -69,7 +69,7 @@
 
   /* Double-tap zoom toggle */
   let lastTap = 0;
-  zoomWrap.addEventListener("touchend", () => {
+  zoomContainer.addEventListener("touchend", () => {
     const now = Date.now();
     if (now - lastTap < 300) {
       setScale(scale === 1 ? 2 : 1);

@@ -1,20 +1,35 @@
-.main-pages {
+.detail-page {
     text-align: center;
     padding: 16px;
 }
 
-.image-btn {
+.detail-image-button {
     border: none;
     padding: 0;
     background: transparent;
 }
 
-.polar-bear-image {
-    max-width: 90%;
-    cursor: pointer;
+.animal-image {
+    width: min(90vw, 360px);
+    height: auto;
+    display: block;
+    margin: 0 auto 16px;
 }
 
-.play-btn {
+/* iPad/tablet: allow a bigger image */
+@media (min-width: 768px) {
+    .animal-image {
+        width: min(70vw, 520px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .animal-image {
+        width: min(60vw, 640px);
+    }
+}
+
+.audio-play-button {
     margin-top: 20px;
     font-size: 22px;
     padding: 16px 32px;
@@ -25,14 +40,14 @@
 }
 
 /* Fullscreen overlay */
-.overlay {
+.image-overlay {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.9);
     z-index: 9999;
 }
 
-.zoom-wrap {
+.image-zoom-container {
     width: 100%;
     height: 100%;
     overflow: auto;
@@ -41,7 +56,7 @@
     touch-action: none;
 }
 
-#zoomImg {
+#image-zoom {
     max-width: 100vw;
     max-height: 100vh;
     transform-origin: center center;
