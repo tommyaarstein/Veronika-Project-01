@@ -59,12 +59,27 @@
 })();
 
 function getBasePath() {
-  // GitHub Pages project site: https://tommyaarstein.github.io/Veronika-Project-01/
+  const script =
+    document.currentScript ||
+    document.querySelector('script[src*="headerInclude.js"]');
+
+  if (script && script.src) {
+    try {
+      const url = new URL(script.src, window.location.href);
+      const parts = url.pathname.split("/").filter(Boolean);
+      if (parts.length >= 2) {
+        const baseParts = parts.slice(0, -2);
+        return baseParts.length ? `/${baseParts.join("/")}` : "";
+      }
+    } catch (_) {}
+  }
+
+  // GitHub Pages project site: https://username.github.io/<repo>/
   if (window.location.hostname.endsWith("github.io")) {
     const parts = window.location.pathname.split("/").filter(Boolean);
     return parts.length ? `/${parts[0]}` : "";
   }
-  // Localhost or custom server: site is at http://127.0.0.1:3000/
+  // Localhost/custom server: site root is /
   return "";
 }
 

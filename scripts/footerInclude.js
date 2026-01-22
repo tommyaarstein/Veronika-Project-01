@@ -13,6 +13,21 @@
 })();
 
 function getBasePath() {
+  const script =
+    document.currentScript ||
+    document.querySelector('script[src*="footerInclude.js"]');
+
+  if (script && script.src) {
+    try {
+      const url = new URL(script.src, window.location.href);
+      const parts = url.pathname.split("/").filter(Boolean);
+      if (parts.length >= 2) {
+        const baseParts = parts.slice(0, -2);
+        return baseParts.length ? `/${baseParts.join("/")}` : "";
+      }
+    } catch (_) {}
+  }
+
   // GitHub Pages project site: https://username.github.io/<repo>/
   if (window.location.hostname.endsWith("github.io")) {
     const parts = window.location.pathname.split("/").filter(Boolean);
