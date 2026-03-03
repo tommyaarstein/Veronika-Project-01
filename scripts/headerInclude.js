@@ -47,6 +47,12 @@
       if (!bc) return;
 
       const trail = getBreadcrumbTrail(base);
+      if (!trail) {
+        const bcNav = bc.closest("nav");
+        if (bcNav) bcNav.hidden = true;
+        return;
+      }
+
       bc.innerHTML = trail
         .map((item, i) => {
           const isLast = i === trail.length - 1;
@@ -86,26 +92,47 @@ function getBasePath() {
 function getBreadcrumbTrail(base) {
   const path = window.location.pathname;
 
-  const trail = [{ label: "Hjem", href: `${base}/` }];
-
-  if (path.endsWith("/pages/categories/animals.html")) {
-    trail.push({ label: "Dyr", href: `${base}/pages/categories/animals.html` });
-    return trail;
+  // Home page — no breadcrumbs
+  if (
+    path === "/" ||
+    path === `${base}/` ||
+    path.endsWith("/index.html")
+  ) {
+    return null;
   }
 
-  if (path.endsWith("/pages/animals/polar-bear.html")) {
-    trail.push({ label: "Dyr", href: `${base}/pages/categories/animals.html` });
-    trail.push({
-      label: "Isbjørn",
-      href: `${base}/pages/animals/polar-bear.html`,
-    });
-    return trail;
-  }
+  const home = { label: "Hjem", href: `${base}/` };
 
   if (path.endsWith("/pages/about.html")) {
-    trail.push({ label: "Om oss", href: `${base}/pages/about.html` });
-    return trail;
+    return [home, { label: "Om oss", href: `${base}/pages/about.html` }];
   }
 
-  return trail;
+  if (path.endsWith("/pages/categories/animals.html")) {
+    return [home, { label: "Dyr", href: `${base}/pages/categories/animals.html` }];
+  }
+
+  const animalNames = {
+    "polar-bear": "Isbjørn",
+    "kanin": "Kanin",
+    "hvalross": "Hvalross",
+    "lundefugl": "Lundefugl",
+    "reinsdyr": "Reinsdyr",
+    "sel": "Sel",
+    "spekkhogger": "Spekkhogger",
+    "ulv": "Ulv",
+  };
+
+  const animalMatch = path.match(/\/pages\/animals\/([^/]+)\.html$/);
+  if (animalMatch) {
+    const slug = animalMatch[1];
+    const label = animalNames[slug] || slug;
+    return [
+      home,
+      { label: "Dyr", href: `${base}/pages/categories/animals.html` },
+      { label: label, href: `${base}/pages/animals/${slug}.html` },
+    ];
+  }
+
+  // Fallback for any other page: just show Home
+  return [home];
 }
