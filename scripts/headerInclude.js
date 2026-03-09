@@ -113,13 +113,13 @@ function getBreadcrumbTrail(base) {
 
   const animalNames = {
     "polar-bear": "Isbjørn",
-    "kanin": "Kanin",
+    "polarhare": "Polar Hare",
     "hvalross": "Hvalross",
     "lundefugl": "Lundefugl",
     "reinsdyr": "Reinsdyr",
     "sel": "Sel",
     "spekkhogger": "Spekkhogger",
-    "ulv": "Ulv",
+    "polarrev": "Polar Rev",
   };
 
   const animalMatch = path.match(/\/pages\/animals\/([^/]+)\.html$/);
